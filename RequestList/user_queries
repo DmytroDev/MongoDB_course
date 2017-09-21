@@ -1,0 +1,13 @@
+/**
+ * 1.1 Get the user by a domain login
+ */
+db.users.find({login: 'secretLogin_999999'});
+
+// 2.	Get the list of users whose first name is «Arnold» and last name starts with «Z»
+db.users.find({firstName: 'Arnold', lastName: /^Z/});
+
+
+3.	Get the list of users who celebrates their birthday in summer
+4.	Get the list of users who celebrates their birthday tomorrow
+5.	Determine the best employee on the basis of the «Users I want to work with» field
+6.	Check that users don’t reference themselves in the  «Users I want to work with» field
