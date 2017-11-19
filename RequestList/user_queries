@@ -6,8 +6,44 @@ db.users.find({login: 'secretLogin_999999'});
 // 2.	Get the list of users whose first name is «Arnold» and last name starts with «Z»
 db.users.find({firstName: 'Arnold', lastName: /^Z/});
 
+//3.	Get the list of users who celebrates their birthday in summer
+db.users.find({ "dateOfBirth": { "$in": [/-06-/,/-07-/,/-06-/] } })
 
-3.	Get the list of users who celebrates their birthday in summer
-4.	Get the list of users who celebrates their birthday tomorrow
-5.	Determine the best employee on the basis of the «Users I want to work with» field
-6.	Check that users don’t reference themselves in the  «Users I want to work with» field
+
+*************
+
+4.	Get the list of users who celebrates their birthday tomorrow. 2
+TODO:
+
+https://stackoverflow.com/questions/30772285/mongodb-find-query-comparision-with-currentdate
+
+
+db.users.find( {"dateOfBirth": new Date()})
+
+db.collectionName.aggregate({
+  "$project": {
+    "year": {
+      "$year": "$date"
+    },
+    "month": {
+      "$month": "$date"
+    },
+    "day": {
+      "$dayOfMonth": "$date"
+    }
+  }
+}, {
+  "$match": {
+    "year": new Date().getFullYear(),
+    "month": new Date().getMonth() + 1, //because January starts with 0
+    "day": new Date().getDate()
+  }
+})
+
+
+
+5.	Determine the best employee on the basis of the «Users I want to work with» field. 3
+TODO:
+
+6.	Check that users don’t reference themselves in the  «Users I want to work with» field. 3
+TODO:

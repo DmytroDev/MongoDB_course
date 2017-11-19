@@ -61,6 +61,7 @@ public class TaskDao {
                 break;
             case 5:
                 status = STATUS_CLOSED;
+                break;
             default:
                 status = STATUS_IN_PROGRESS;
         }

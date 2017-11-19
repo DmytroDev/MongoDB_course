@@ -1,0 +1,28 @@
+//1. Calculate the total number of closed tasks;
+db.tasks.find({status: 'closed'}).count();
+
+
+//2. Select all current (status "in progress") tasks for a project (using a compound index);
+db.tasks.createIndex( {"status": 1, "project": 1 } );
+var projectId = db.projects.findOne( {projectName: 'projectName_5'} );
+db.tasks.find( { project: projectId._id, status: 'in progress'} );
+
+
+//3. Select all of the tasks where the description contains the word «deadline».
+//It’s better to write two queries: one with the text index, and the other one with a regular expression;
+
+first:
+db.tasks.createIndex( { description: "text" } );
+db.tasks.find( { $text: {$search: 'deadline'}} );
+
+second:
+db.tasks.find({description: /deadline/});
+
+
+//4. Select every open task (status «open», «in progress», «reopened») by specific user sorted by start date  (using a compound index);
+db.tasks.createIndex( {"responsiblePerson": 1, "startDate": 1 } );
+var userID = db.users.findOne( {login: 'secretLogin_1000'} );
+db.tasks.find({responsiblePerson: userID._id , status: {"$in": ['open', 'in progress','reopened']}}).sort({startDate: 1});
+
+// 5. Select the project with the largest number of tasks. 2
+    TODO:

@@ -1,5 +1,7 @@
 DBS01 dnadolenko
 
+mongodb v.3.4.9
+
 run in cmd or terminal:
 1/ mongo.exe connect
 2/ use pm

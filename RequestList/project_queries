@@ -1,0 +1,20 @@
+//1. Get a list of open projects. 1
+db.projects.find({status: 'open'});
+
+//2. Calculate the total budget of completed projects. 2
+
+db.projects.aggregate(
+{
+$match: { status: "closed" }
+},
+{
+$group: { _id: "$status", total: { $sum: "$budget"} }
+}
+);
+
+//3. Calculate the average number of people involved in the project. 2
+TODO:
+
+
+//4. Identify the busiest employee based on the “List of project’s participants” field and display all of their projects. 3
+TODO:
